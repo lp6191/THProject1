@@ -71,7 +71,7 @@ var quotes = [
 		source: "Albert Einstein",
 		tags: "Humor"
 	}
-	
+
 ];
 
 var quoteBackup = [];
@@ -93,10 +93,10 @@ function changeBackground(){
 // calls getRandomQuote function and prints out the random quote
 function printQuote(){
 	var quoteElement = getRandomQuote();
-	
+
 	//concatenate the string that contains the quote
 	var quoteStirng="";
-	quoteStirng += '<p class="quote">' + quoteElement.quote + '</p>' + 
+	quoteStirng += '<p class="quote">' + quoteElement.quote + '</p>' +
 							'<p class="source">' + quoteElement.source;
 	if(typeof quoteElement.citation !== 'undefined'){
 		quoteStirng += '<span class="citation">' + quoteElement.citation + '</span>';
@@ -104,24 +104,23 @@ function printQuote(){
 		quoteStirng += '<span class="year">' + quoteElement.year + '</span>';
 	}
 	quoteStirng += "<span class ='tags'>" + quoteElement.tags + "</span>" +'</p>';
-	
+
 	//change the quote
 	document.getElementById('quote-box').innerHTML = quoteStirng;
-	
+
 	//change the background color
 	changeBackground();
-	
+
 	//log the quote to the console
 	console.log(quoteElement.quote);
-	
+
 	//remove the displayed quote from the list of quotes or "start over"
 	//console.log("quotes: "quotes.length);
 	if(quotes.length == 1){
 		quotes = quoteBackup;
 		quoteBackup = [];
 	}else {
-
-		quoteBackup.push(quoteElement); 
+		quoteBackup.push(quoteElement);
 		//console.log("quoteBackup: "+quoteBackup.length);
 		var y = quotes.indexOf(quoteElement);
 		quotes.splice(y, 1);
@@ -131,3 +130,7 @@ function printQuote(){
 // event listener to respond to "Show another quote" button clicks
 // when user clicks anywhere on the button, the "printQuote" function is called
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
+
+//change the quote if the user doesn't click the button
+var delay = 30000;
+var interval = window.setInterval(printQuote, delay);
